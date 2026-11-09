@@ -9,5 +9,8 @@ import java.util.Optional;
 public interface ExerciseTypeRepository extends JpaRepository<ExerciseType, Integer> {
 
     // Hibernate automatically creates the implementation for this since it understands method signature
-    public Optional<ExerciseType> findByExerciseNameIgnoreCase(String exerciseName);
+    Optional<ExerciseType> findByExerciseNameIgnoreCase(String exerciseName);
+
+    // Returns how many records were deleted
+    Long deleteByExerciseNameIgnoreCase(String exerciseName);
 }

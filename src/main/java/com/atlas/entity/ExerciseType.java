@@ -1,11 +1,20 @@
 package com.atlas.entity;
 
+import com.atlas.service.ExerciseTypeService;
 import jakarta.persistence.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Entity
 @Table(name = "exercise_type") // Dont need annotation at all if class name is camelCase of db table
 public class ExerciseType {
+
+    private static final Logger logger = LoggerFactory.getLogger(ExerciseType.class);
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // tells hibernate to use dbs identity mechanism to generate id
@@ -75,5 +84,23 @@ public class ExerciseType {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Boolean validateNonNullFields() {
+        logger.info("Validating Non Null Fields for ExerciseType");
+        List nonNullList = Arrays.asList(
+                exerciseName, exerciseDescription,
+                muscleGroups, machineUsed
+        );
+
+        for (Object o : nonNullList) {
+            //TODO: Possibly check for empty strings as well
+            if (o == null) {
+                logger.info("Null item found");
+                return false;
+            }
+        }
+
+        return true;
     }
 }

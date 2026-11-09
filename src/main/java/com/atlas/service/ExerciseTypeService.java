@@ -46,11 +46,32 @@ public class ExerciseTypeService {
         return newExerciseType;
     }
 
-    public void deleteExerciseTypeById(@NonNull Integer id) {
+    public Boolean deleteExerciseTypeById(@NonNull Integer id) {
+        // TODO: This may need to cascade since this is a foreign key for other tables
         try {
+            logger.info("Searching for Exercise Type ID: {}", id);
+            if (!exerciseTypeRepository.existsById(id)) {
+                logger.info("Exercise Type ID: {} does not exist", id);
+                return false;
+            }
+            logger.info("Deleting Exercise Type ID: {}", id);
             exerciseTypeRepository.deleteById(id);
+            return true;
         } catch (Exception e) {
-            logger.error("Error deleting id {} with issue: {}", id, e.getMessage());
+            logger.error("Error deleting Exercise Type {} with issue: {}", id, e.getMessage());
+            return false;
+        }
+    }
+
+    public Boolean deleteExerciseTypeByName(@NonNull String name) {
+        // TODO: This may need to cascade since this is a foreign key for other tables
+        try {
+            logger.info("Deleting Exercise Type Name: {}", name);
+            Long recordsDeleted = exerciseTypeRepository.deleteByExerciseNameIgnoreCase(name);
+            return recordsDeleted != 0;
+        } catch (Exception e) {
+            logger.error("Error deleting Exercise Type {} with issue: {}", name, e.getMessage());
+            return false;
         }
     }
 }
