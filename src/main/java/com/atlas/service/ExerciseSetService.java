@@ -32,12 +32,27 @@ public class ExerciseSetService {
         return exerciseSet.orElse(null);
     }
 
-    public ExerciseSet createExerciseSet(ExerciseSet newExerciseSet) {
-        exerciseSetRepository.save(newExerciseSet);
-        return newExerciseSet;
+    public Boolean createExerciseSet(ExerciseSet newExerciseSet) {
+        logger.info("Creating New Exercise Set");
+        try {
+            exerciseSetRepository.save(newExerciseSet);
+            logger.info("Successfully Created New Exercise Set");
+            return true;
+        } catch (Exception e) {
+            logger.error("Error Creating New Exercise Set: {}", e.getMessage());
+            return false;
+        }
     }
 
-    public void deleteExerciseSetById(@NonNull Integer id) {
-        exerciseSetRepository.deleteById(id);
+    public Boolean deleteExerciseSetById(@NonNull Integer id) {
+        logger.info("Deleting Exercise Set ID: {}", id);
+        try  {
+            exerciseSetRepository.deleteById(id);
+            logger.info("Successfully Deleted Exercise Set ID: {}", id);
+            return true;
+        } catch (Exception e) {
+            logger.error("Error Deleting Exercise Set ID {} with issue: {}", id, e.getMessage());
+            return false;
+        }
     }
 }

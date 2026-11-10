@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Controller
 @RequestMapping("/exercise/type")
@@ -21,14 +20,22 @@ public class ExerciseTypeController {
 
     @GetMapping
     @ResponseBody // returns json instead of html
-    public List<ExerciseType> getAllExerciseTypes() {
-        return exerciseTypeService.getAllExerciseTypes();
+    public ResponseEntity<?> getAllExerciseTypes() {
+        try {
+            return ResponseEntity.ok(exerciseTypeService.getAllExerciseTypes());
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Error Fetching All Exercise Types");
+        }
     }
 
     @GetMapping("/{id}")
     @ResponseBody
-    public ExerciseType getExerciseTypeById(@PathVariable Integer id) {
-        return exerciseTypeService.getExerciseTypeById(id);
+    public ResponseEntity<?> getExerciseTypeById(@PathVariable Integer id) {
+        try {
+            return ResponseEntity.ok(exerciseTypeService.getExerciseTypeById(id));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Error Fetching Exercise Type Id: " + id);
+        }
     }
 
     @PostMapping

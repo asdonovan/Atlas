@@ -1,8 +1,6 @@
 package com.atlas.service;
 
 import com.atlas.entity.Workout;
-import com.atlas.entity.WorkoutExercise;
-import com.atlas.repository.WorkoutExerciseRepository;
 import com.atlas.repository.WorkoutRepository;
 import org.jspecify.annotations.NonNull;
 import org.slf4j.Logger;
@@ -14,7 +12,6 @@ import java.util.Optional;
 
 @Service
 public class WorkoutService {
-
 
     private static final Logger logger = LoggerFactory.getLogger(WorkoutService.class);
 
@@ -35,12 +32,27 @@ public class WorkoutService {
         return workout.orElse(null);
     }
 
-    public Workout createWorkout(Workout newWorkout) {
-        workoutRepository.save(newWorkout);
-        return newWorkout;
+    public Boolean createWorkout(Workout newWorkout) {
+        logger.info("Creating New Workout");
+        try {
+            workoutRepository.save(newWorkout);
+            logger.info("Successfully Created New Workout");
+            return true;
+        } catch (Exception e) {
+            logger.error("Error Creating New Workout: {}", e.getMessage());
+            return false;
+        }
     }
 
-    public void deleteWorkoutById(@NonNull Integer id) {
-        workoutRepository.deleteById(id);
+    public Boolean deleteWorkoutById(@NonNull Integer id) {
+        logger.info("Attempting To Delete Workout Id: {}", id);
+        try {
+            workoutRepository.deleteById(id);
+            logger.info("Successfully Deleted Workout Id: {}", id);
+            return true;
+        } catch (Exception e) {
+            logger.error("Error Occurred Deleting Workout Id: {}", id);
+            return false;
+        }
     }
 }
