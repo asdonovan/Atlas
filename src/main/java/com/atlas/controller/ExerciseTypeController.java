@@ -20,7 +20,7 @@ public class ExerciseTypeController {
     }
 
     @GetMapping
-    @ResponseBody
+    @ResponseBody // returns json instead of html
     public List<ExerciseType> getAllExerciseTypes() {
         return exerciseTypeService.getAllExerciseTypes();
     }
