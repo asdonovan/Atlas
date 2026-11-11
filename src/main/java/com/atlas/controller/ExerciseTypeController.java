@@ -32,7 +32,12 @@ public class ExerciseTypeController {
     @ResponseBody
     public ResponseEntity<?> getExerciseTypeById(@PathVariable Integer id) {
         try {
-            return ResponseEntity.ok(exerciseTypeService.getExerciseTypeById(id));
+            ExerciseType exerciseType = exerciseTypeService.getExerciseTypeById(id);
+            if (exerciseType != null) {
+                return ResponseEntity.ok(exerciseType);
+            } else {
+                return ResponseEntity.ok("No Exercise Type Found For Id: " + id);
+            }
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body("Error Fetching Exercise Type Id: " + id);
         }

@@ -18,10 +18,13 @@ public class WorkoutExercise {
     @JoinColumn(name = "exercise_type_id")
     private ExerciseType exerciseType;
 
+    @Column
     private Integer exerciseOrderNum;
 
+    @Column
     private Integer minutesToComplete;
 
+    @Column
     private LocalDateTime createdAt;
 
     public Integer getWorkoutExerciseId() {

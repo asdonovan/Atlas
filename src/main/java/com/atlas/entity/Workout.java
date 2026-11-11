@@ -1,9 +1,6 @@
 package com.atlas.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -15,10 +12,13 @@ public class Workout {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // tells hibernate to use dbs identity mechanism to generate id
     private Integer workoutId;
 
+    @Column
     private LocalDate workoutDate;
 
+    @Column
     private Integer workoutDurationMin;
 
+    @Column
     private LocalDateTime createdAt;
 
     public Integer getWorkoutId() {

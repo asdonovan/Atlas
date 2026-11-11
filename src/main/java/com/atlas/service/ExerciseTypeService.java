@@ -67,7 +67,7 @@ public class ExerciseTypeService {
         // TODO: This may need to cascade since this is a foreign key for other tables
         try {
             logger.info("Deleting Exercise Type Name: {}", name);
-            Long recordsDeleted = exerciseTypeRepository.deleteByExerciseNameIgnoreCase(name);
+            Integer recordsDeleted = exerciseTypeRepository.deleteByExerciseNameIgnoreCase(name);
             return recordsDeleted != 0;
         } catch (Exception e) {
             logger.error("Error deleting Exercise Type {} with issue: {}", name, e.getMessage());

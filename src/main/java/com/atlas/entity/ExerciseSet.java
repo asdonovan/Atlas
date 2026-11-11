@@ -16,20 +16,28 @@ public class ExerciseSet {
     @JoinColumn(name = "workout_exercise_id") // Foreign key
     private WorkoutExercise workoutExercise;
 
+    @Column
     private Integer setOrderNum;
 
+    @Column
     private BigDecimal weightLbs;
 
+    @Column
     private Integer repetitions;
 
+    @Column
     private BigDecimal cardioIncline;
 
+    @Column
     private BigDecimal cardioDistanceMi;
 
+    @Column
     private BigDecimal cardioSpeedMph;
 
+    @Column
     private String durationMin;
 
+    @Column
     private LocalDateTime createdAt;
 
     public Integer getExerciseSetId() {

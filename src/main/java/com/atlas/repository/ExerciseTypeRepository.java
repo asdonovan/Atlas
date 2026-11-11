@@ -12,5 +12,5 @@ public interface ExerciseTypeRepository extends JpaRepository<ExerciseType, Inte
     Optional<ExerciseType> findByExerciseNameIgnoreCase(String exerciseName);
 
     // Returns how many records were deleted
-    Long deleteByExerciseNameIgnoreCase(String exerciseName);
+    Integer deleteByExerciseNameIgnoreCase(String exerciseName);
 }
